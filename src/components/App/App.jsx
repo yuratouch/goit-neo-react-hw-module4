@@ -1,17 +1,12 @@
 import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import fetchImages from "/src/api/unsplash-api";
+import Loader from "/src/components/Loader/Loader";
 import SearchBar from "/src/components/SearchBar/SearchBar";
-import PropagateLoader from "react-spinners/PropagateLoader";
 import ImageGallery from "/src/components/ImageGallery/ImageGallery";
 import ErrorMessage from "/src/components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "/src/components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "/src/components/ImageModal/ImageModal";
-
-const loaderCssOverride = {
-  textAlign: "center",
-  padding: "60px 0",
-};
 
 function App() {
   const [page, setPage] = useState(1);
@@ -82,11 +77,7 @@ function App() {
         <LoadMoreBtn loadMoreHandle={loadMoreHandle} />
       ) : null}
       {error && <ErrorMessage errorMessage={error} />}
-      <PropagateLoader
-        loading={isLoading}
-        color="#6f85d6"
-        cssOverride={loaderCssOverride}
-      />
+      <Loader isLoading={isLoading} />
       <ImageModal
         images={images}
         isOpen={isModalOpen}
