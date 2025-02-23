@@ -1,0 +1,11 @@
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.loadMore {
+  background-color: #6f85d6;
+  margin: 0 auto;
+  min-width: 150px;
+}

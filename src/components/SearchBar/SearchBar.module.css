@@ -1,0 +1,24 @@
+.searchBar {
+  display: flex;
+  justify-content: center;
+  background-color: #22a1f4;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 12px;
+}
+
+.searchInput {
+  display: block;
+  background-color: #fff;
+  outline: #fff;
+  color: #242424;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+  min-width: 250px;
+  border: none;
+}
