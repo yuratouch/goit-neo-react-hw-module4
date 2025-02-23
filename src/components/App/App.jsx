@@ -30,38 +30,37 @@ function App() {
     return () => clearTimeout(timer);
   }, [images]);
 
-  async function loadImages(query, page) {
-    try {
-      const images = await fetchImages(query, page);
+  useEffect(() => {
+    if (!query) return;
+    setIsLoading(true);
+    setError(false);
 
-      if (!images.length) {
-        setError("No images found. Please try another search query.");
+    async function loadImages() {
+      try {
+        const images = await fetchImages(query, page);
+
+        if (!images.length) {
+          setError("No images found. Please try another search query.");
+        }
+        setImages((prevImages) => [...prevImages, ...images]);
+      } catch {
+        setError("Something went wrong. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
-      setImages((prevImages) => [...prevImages, ...images]);
-    } catch {
-      setError("Something went wrong. Please try again later.");
-    } finally {
-      setIsLoading(false);
     }
-  }
 
-  async function searchHadle(query, page = 1) {
+    loadImages();
+  }, [query, page]);
+
+  function searchHadle(query) {
     setPage(1);
     setImages([]);
     setQuery(query);
-    setError(false);
-    setIsLoading(true);
-
-    loadImages(query, page);
   }
 
-  async function loadMoreHandle() {
-    const nextPage = page + 1;
-    setIsLoading(true);
-    setPage(nextPage);
-    setError(false);
-
-    loadImages(query, nextPage);
+  function loadMoreHandle() {
+    setPage((prevPage) => prevPage + 1);
   }
 
   function openModal(image) {
